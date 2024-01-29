@@ -19,9 +19,8 @@ SIDEBAR - SYNC & BACKUP
 
 
 
-SIDEBAR - FAQ & ABOUT
-- FAQ adalah Frequently Asked Question, lalu question darimana? 
-... wong aplikasi saja baru dibuat dari orang tidak dikenal pula
+SIDEBAR - ABOUT
+
 
 
 

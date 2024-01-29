@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import {
   View,
   Text,
@@ -8,6 +9,7 @@ import {
   Picker,
   Modal,
   Button,
+  Animated,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -21,8 +23,6 @@ import { AntDesign } from "@expo/vector-icons";
 
 const Home = () => {
   const navigation = useNavigation();
-
-  // Sidebar ______________________________________________________________
 
   // Categories ___________________________________________________________
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -197,9 +197,7 @@ const Home = () => {
 
         setNotes(newNotes);
       } else {
-        console.log(
-          "Notes are not yet saved in Asyncstorage and will be created soon"
-        );
+        console.log("Notes are not yet saved in Asyncstorage and will be created soon");
         const retrievedNotes = [];
 
         const jsonValue = JSON.stringify(retrievedNotes);
@@ -224,6 +222,8 @@ const Home = () => {
 
     return unsubscribe;
   }, [navigation]);
+
+  // Sidebar ______________________________________________________________
 
   // Short Menu ___________________________________________________________
   const [sortType, setSortType] = useState("title");
@@ -277,23 +277,13 @@ const Home = () => {
         </TouchableOpacity>
       </View>
 
-      <Modal
-        visible={isShortMenuModalVisible}
-        transparent={true}
-        animationType="fade"
-      >
-        <View style={styles.menuContainer}>
-          <TouchableOpacity
-            onPress={() => handleSortBy("title")}
-            style={styles.menuItem}
-          >
+      <Modal visible={isShortMenuModalVisible} transparent={true} animationType="fade">
+        <View style={styles.menuContainerShortBy}>
+          <TouchableOpacity onPress={() => handleSortBy("title")} style={styles.menuItem}>
             <Text>Title</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => handleSortBy("date")}
-            style={styles.menuItem}
-          >
+          <TouchableOpacity onPress={() => handleSortBy("date")} style={styles.menuItem}>
             <Text>Date</Text>
           </TouchableOpacity>
 
@@ -304,10 +294,7 @@ const Home = () => {
             <Text>Favorite</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={handleCloseShortMenu}
-            style={styles.menuItem}
-          >
+          <TouchableOpacity onPress={handleCloseShortMenu} style={styles.menuItem}>
             <Text>Close Menu</Text>
           </TouchableOpacity>
         </View>
@@ -322,26 +309,17 @@ const Home = () => {
         </TouchableOpacity>
 
         <Modal visible={isMenuVisible} transparent={true} animationType="fade">
-          <View style={styles.menuContainer}>
-            <TouchableOpacity
-              onPress={handleNewCategory}
-              style={styles.menuItem}
-            >
+          <View style={styles.menuContainerCategory}>
+            <TouchableOpacity onPress={handleNewCategory} style={styles.menuItem}>
               <Text>+ New Category</Text>
             </TouchableOpacity>
 
             {showDeleteRename && (
               <>
-                <TouchableOpacity
-                  onPress={handleDelete}
-                  style={styles.menuItem}
-                >
+                <TouchableOpacity onPress={handleDelete} style={styles.menuItem}>
                   <Text>Delete</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={handleRename}
-                  style={styles.menuItem}
-                >
+                <TouchableOpacity onPress={handleRename} style={styles.menuItem}>
                   <Text>Rename</Text>
                 </TouchableOpacity>
               </>
@@ -354,11 +332,7 @@ const Home = () => {
         </Modal>
       </View>
 
-      <Modal
-        visible={isNewModalVisible}
-        transparent={true}
-        animationType="fade"
-      >
+      <Modal visible={isNewModalVisible} transparent={true} animationType="fade">
         <View style={styles.modalContainer}>
           <View style={styles.modalInner}>
             <TextInput
@@ -369,10 +343,7 @@ const Home = () => {
             />
 
             <View style={styles.modalButtonContainer}>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={addCategory}
-              >
+              <TouchableOpacity style={styles.modalButton} onPress={addCategory}>
                 <Text>Save</Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -401,16 +372,10 @@ const Home = () => {
               onChangeText={(text) => setRenameCategory(text)}
             />
             <View style={styles.modalButtonContainer}>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={handleRenameSave}
-              >
+              <TouchableOpacity style={styles.modalButton} onPress={handleRenameSave}>
                 <Text>Save</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={handleRenameCancel}
-              >
+              <TouchableOpacity style={styles.modalButton} onPress={handleRenameCancel}>
                 <Text>Cancel</Text>
               </TouchableOpacity>
             </View>
@@ -482,6 +447,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
+  // Sidebar
+
+  // Short Menu
+  menuContainerShortBy: {
+    backgroundColor: "white",
+    borderColor: "gray", // atur warna border
+    borderWidth: 2, // atur lebar border
+    position: "absolute",
+    top: 50,
+    right: 0,
+    width: 150,
+  },
+
   // Categories ___________________________________________________________
   category: {
     marginVertical: 5,
@@ -491,12 +469,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  menuContainer: {
+  menuContainerCategory: {
     backgroundColor: "white",
     borderColor: "gray", // atur warna border
     borderWidth: 2, // atur lebar border
     position: "absolute",
-    top: 50,
+    top: 90,
     right: 0,
     width: 150,
   },

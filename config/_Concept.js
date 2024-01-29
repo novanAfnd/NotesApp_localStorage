@@ -54,7 +54,7 @@ Main Features:
 - Sidebar Menu (kita buat header Home menjadi tombol untuk membuka menu)
 - Sidabar - Setting (kita buat stack screen menuju screen setting utuh)
 - Sidabar - Sync & Backup (kita buat stack screen menuju screen sync & backup utuh)
-- Sidebar - Menu FAQ dan About
+- Sidebar - Menu About (kita buat stack screen menuju screen about utuh)
 
 Optional Features (menyusul):
 - Setting - Theme ( Light dan Dark, kemudian warna box notenya bisa diubah sesuka hati)
