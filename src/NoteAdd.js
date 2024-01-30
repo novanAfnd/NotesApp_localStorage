@@ -8,6 +8,7 @@ import {
   Picker,
   Modal,
   Button,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -229,9 +230,7 @@ const NoteAdd = () => {
 
         console.log("arrayOfNotes added new notes: ");
         console.log(latestArrayOfNotes);
-        console.log(
-          "___________________________________________________________"
-        );
+        console.log("___________________________________________________________");
 
         const updatedJsonValue = JSON.stringify(latestArrayOfNotes);
 
@@ -260,44 +259,29 @@ const NoteAdd = () => {
           <Text>Menu</Text>
         </TouchableOpacity>
 
-        <Modal visible={isMenuVisible} transparent={true} animationType="fade">
-          <View style={styles.menuContainer}>
-            <TouchableOpacity
-              onPress={handleNewCategory}
-              style={styles.menuItem}
-            >
-              <Text>+ New Category</Text>
-            </TouchableOpacity>
+        <TouchableWithoutFeedback onPress={handleCloseMenu}>
+          <Modal visible={isMenuVisible} transparent={true} animationType="fade">
+            <View style={styles.menuContainer}>
+              <TouchableOpacity onPress={handleNewCategory} style={styles.menuItem}>
+                <Text>+ New Category</Text>
+              </TouchableOpacity>
 
-            {showDeleteRename && (
-              <>
-                <TouchableOpacity
-                  onPress={handleDelete}
-                  style={styles.menuItem}
-                >
-                  <Text>Delete</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={handleRename}
-                  style={styles.menuItem}
-                >
-                  <Text>Rename</Text>
-                </TouchableOpacity>
-              </>
-            )}
-
-            <TouchableOpacity onPress={handleCloseMenu} style={styles.menuItem}>
-              <Text>Close Menu</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
+              {showDeleteRename && (
+                <>
+                  <TouchableOpacity onPress={handleDelete} style={styles.menuItem}>
+                    <Text>Delete</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={handleRename} style={styles.menuItem}>
+                    <Text>Rename</Text>
+                  </TouchableOpacity>
+                </>
+              )}
+            </View>
+          </Modal>
+        </TouchableWithoutFeedback>
       </View>
 
-      <Modal
-        visible={isNewModalVisible}
-        transparent={true}
-        animationType="fade"
-      >
+      <Modal visible={isNewModalVisible} transparent={true} animationType="fade">
         <View style={styles.modalContainer}>
           <View style={styles.modalInner}>
             <TextInput
@@ -308,10 +292,7 @@ const NoteAdd = () => {
             />
 
             <View style={styles.modalButtonContainer}>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={addCategory}
-              >
+              <TouchableOpacity style={styles.modalButton} onPress={addCategory}>
                 <Text>Save</Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -340,16 +321,10 @@ const NoteAdd = () => {
               onChangeText={(text) => setRenameCategory(text)}
             />
             <View style={styles.modalButtonContainer}>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={handleRenameSave}
-              >
+              <TouchableOpacity style={styles.modalButton} onPress={handleRenameSave}>
                 <Text>Save</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={handleRenameCancel}
-              >
+              <TouchableOpacity style={styles.modalButton} onPress={handleRenameCancel}>
                 <Text>Cancel</Text>
               </TouchableOpacity>
             </View>
@@ -380,13 +355,8 @@ const NoteAdd = () => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalInner}>
-            <Text style={styles.warningText}>
-              Title and note cannot be empty!
-            </Text>
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={hideWarningModal}
-            >
+            <Text style={styles.warningText}>Title and note cannot be empty!</Text>
+            <TouchableOpacity style={styles.modalButton} onPress={hideWarningModal}>
               <Text>OK</Text>
             </TouchableOpacity>
           </View>
@@ -408,15 +378,8 @@ const NoteAdd = () => {
       />
 
       <View style={styles.buttonView}>
-        <TouchableOpacity
-          onPress={toggleFavorite}
-          style={styles.favoriteButton}
-        >
-          <AntDesign
-            name={isFavorite ? "star" : "staro"}
-            size={45}
-            color="yellow"
-          />
+        <TouchableOpacity onPress={toggleFavorite} style={styles.favoriteButton}>
+          <AntDesign name={isFavorite ? "star" : "staro"} size={45} color="yellow" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.saveButton} onPress={handleAdd}>
           <AntDesign name="save" size={45} color="black" />

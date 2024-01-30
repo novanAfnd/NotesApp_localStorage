@@ -5,23 +5,30 @@
 - Sidebar - Menu FAQ dan About
 
 SIDEBAR MENU
-
+- Setting
+- Sync & Backup
+- About
 
 
 
 SIDEBAR - SETTING
-
+- Theme (Light dan Dark)
 
 
 
 SIDEBAR - SYNC & BACKUP
-
+- Email User
+- Auto Sync Schedule
 
 
 
 SIDEBAR - ABOUT
+- Tentang Aplikasi
 
 
+
+SIDEBAR - FAQ
+- Menyusul
 
 
 

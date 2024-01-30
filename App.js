@@ -4,9 +4,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 // Drawer Navigator screens
-import Settings from "./src/Sidebar/Settings";
-import Sync_Backup from "./src/Sidebar/Sync_Backup";
-import About from "./src/Sidebar/About";
+import Sidebar from "./src/Sidebar";
+import Settings from "./src/sidebar/Settings";
+import SyncBackup from "./src/sidebar/SyncBackup";
+import About from "./src/sidebar/About";
 
 // Stack Navigator screens
 import Home from "./src/Home";
@@ -17,17 +18,60 @@ import Detail from "./src/Detail";
 // AsyncStorage
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+// Style
+import { Ionicons } from "@expo/vector-icons";
+
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
 // Drawer Navigator
 function DrawerRoutes() {
   return (
-    <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name="Home" component={Home} options={{ drawerLabel: "Notes" }} />
-      <Drawer.Screen name="Settings" component={Settings} />
-      <Drawer.Screen name="Sync and Backup" component={Sync_Backup} />
-      <Drawer.Screen name="About" component={About} />
+    <Drawer.Navigator
+      initialRouteName="Home"
+      drawerContent={(props) => <Sidebar {...props} />}
+      screenOptions={{
+        drawerActiveBackgroundColor: "gray",
+        drawerActiveTintColor: "white",
+        drawerLabelStyle: { marginLeft: -20 },
+      }}
+    >
+      <Drawer.Screen
+        name="Home"
+        component={Home}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name="home-outline" size={22} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name="settings-outline" size={24} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Sync and Backup"
+        component={SyncBackup}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name="sync-outline" size={24} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="About"
+        component={About}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name="information-circle-outline" size={24} color={color} />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 }

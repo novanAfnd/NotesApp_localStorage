@@ -6,6 +6,7 @@ import {
   TextInput,
   Picker,
   Modal,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -274,44 +275,29 @@ const Detail = ({ route }) => {
           <Text>Menu</Text>
         </TouchableOpacity>
 
-        <Modal visible={isMenuVisible} transparent={true} animationType="fade">
-          <View style={styles.menuContainer}>
-            <TouchableOpacity
-              onPress={handleNewCategory}
-              style={styles.menuItem}
-            >
-              <Text>+ New Category</Text>
-            </TouchableOpacity>
+        <TouchableWithoutFeedback onPress={handleCloseMenu}>
+          <Modal visible={isMenuVisible} transparent={true} animationType="fade">
+            <View style={styles.menuContainer}>
+              <TouchableOpacity onPress={handleNewCategory} style={styles.menuItem}>
+                <Text>+ New Category</Text>
+              </TouchableOpacity>
 
-            {showDeleteRename && (
-              <>
-                <TouchableOpacity
-                  onPress={handleDelete}
-                  style={styles.menuItem}
-                >
-                  <Text>Delete</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={handleRename}
-                  style={styles.menuItem}
-                >
-                  <Text>Rename</Text>
-                </TouchableOpacity>
-              </>
-            )}
-
-            <TouchableOpacity onPress={handleCloseMenu} style={styles.menuItem}>
-              <Text>Close Menu</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
+              {showDeleteRename && (
+                <>
+                  <TouchableOpacity onPress={handleDelete} style={styles.menuItem}>
+                    <Text>Delete</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={handleRename} style={styles.menuItem}>
+                    <Text>Rename</Text>
+                  </TouchableOpacity>
+                </>
+              )}
+            </View>
+          </Modal>
+        </TouchableWithoutFeedback>
       </View>
 
-      <Modal
-        visible={isNewModalVisible}
-        transparent={true}
-        animationType="fade"
-      >
+      <Modal visible={isNewModalVisible} transparent={true} animationType="fade">
         <View style={styles.modalContainer}>
           <View style={styles.modalInner}>
             <TextInput
@@ -322,10 +308,7 @@ const Detail = ({ route }) => {
             />
 
             <View style={styles.modalButtonContainer}>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={addCategory}
-              >
+              <TouchableOpacity style={styles.modalButton} onPress={addCategory}>
                 <Text>Save</Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -354,16 +337,10 @@ const Detail = ({ route }) => {
               onChangeText={(text) => setRenameCategory(text)}
             />
             <View style={styles.modalButtonContainer}>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={handleRenameSave}
-              >
+              <TouchableOpacity style={styles.modalButton} onPress={handleRenameSave}>
                 <Text>Save</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={handleRenameCancel}
-              >
+              <TouchableOpacity style={styles.modalButton} onPress={handleRenameCancel}>
                 <Text>Cancel</Text>
               </TouchableOpacity>
             </View>
@@ -401,20 +378,10 @@ const Detail = ({ route }) => {
       />
 
       <View style={styles.buttonView}>
-        <TouchableOpacity
-          onPress={toggleFavorite}
-          style={styles.favoriteButton}
-        >
-          <AntDesign
-            name={isFavorite ? "star" : "staro"}
-            size={45}
-            color="yellow"
-          />
+        <TouchableOpacity onPress={toggleFavorite} style={styles.favoriteButton}>
+          <AntDesign name={isFavorite ? "star" : "staro"} size={45} color="yellow" />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.deleteButton}
-          onPress={handleDeleteNote}
-        >
+        <TouchableOpacity style={styles.deleteButton} onPress={handleDeleteNote}>
           <AntDesign name="delete" size={45} color="black" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.updateButton} onPress={handeUpdateNote}>

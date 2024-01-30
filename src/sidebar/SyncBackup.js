@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const Sync_Backup = () => {
+const SyncBackup = () => {
   return (
     <View>
-      <Text>Sync_Backup</Text>
+      <Text>SyncBackup</Text>
     </View>
   );
 };
 
-export default Sync_Backup;
+export default SyncBackup;

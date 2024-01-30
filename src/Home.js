@@ -9,7 +9,7 @@ import {
   Picker,
   Modal,
   Button,
-  Animated,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -266,39 +266,43 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      {/* Sidebar & Short Menu _______________________________________________*/}
+      {/* Short Menu ___________________________________________________________*/}
       <View style={styles.headerMenuContainer}>
         <TouchableOpacity>
-          <Text>Sidebar</Text>
+          <Text>Short by:</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={toggleShortMenu}>
-          <Text>Short by:</Text>
+          <Text>Menu</Text>
         </TouchableOpacity>
       </View>
 
-      <Modal visible={isShortMenuModalVisible} transparent={true} animationType="fade">
-        <View style={styles.menuContainerShortBy}>
-          <TouchableOpacity onPress={() => handleSortBy("title")} style={styles.menuItem}>
-            <Text>Title</Text>
-          </TouchableOpacity>
+      <TouchableWithoutFeedback onPress={handleCloseShortMenu}>
+        <Modal visible={isShortMenuModalVisible} transparent={true} animationType="fade">
+          <View style={styles.menuContainerShortBy}>
+            <TouchableOpacity
+              onPress={() => handleSortBy("title")}
+              style={styles.menuItem}
+            >
+              <Text>Title</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => handleSortBy("date")} style={styles.menuItem}>
-            <Text>Date</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleSortBy("date")}
+              style={styles.menuItem}
+            >
+              <Text>Date</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => handleSortBy("favorite")}
-            style={styles.menuItem}
-          >
-            <Text>Favorite</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={handleCloseShortMenu} style={styles.menuItem}>
-            <Text>Close Menu</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
+            <TouchableOpacity
+              onPress={() => handleSortBy("favorite")}
+              style={styles.menuItem}
+            >
+              <Text>Favorite</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      </TouchableWithoutFeedback>
 
       {/* Category ___________________________________________________________*/}
       <View style={styles.category}>
@@ -308,28 +312,26 @@ const Home = () => {
           <Text>Menu</Text>
         </TouchableOpacity>
 
-        <Modal visible={isMenuVisible} transparent={true} animationType="fade">
-          <View style={styles.menuContainerCategory}>
-            <TouchableOpacity onPress={handleNewCategory} style={styles.menuItem}>
-              <Text>+ New Category</Text>
-            </TouchableOpacity>
+        <TouchableWithoutFeedback onPress={handleCloseMenu}>
+          <Modal visible={isMenuVisible} transparent={true} animationType="fade">
+            <View style={styles.menuContainerCategory}>
+              <TouchableOpacity onPress={handleNewCategory} style={styles.menuItem}>
+                <Text>+ New Category</Text>
+              </TouchableOpacity>
 
-            {showDeleteRename && (
-              <>
-                <TouchableOpacity onPress={handleDelete} style={styles.menuItem}>
-                  <Text>Delete</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleRename} style={styles.menuItem}>
-                  <Text>Rename</Text>
-                </TouchableOpacity>
-              </>
-            )}
-
-            <TouchableOpacity onPress={handleCloseMenu} style={styles.menuItem}>
-              <Text>Close Menu</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
+              {showDeleteRename && (
+                <>
+                  <TouchableOpacity onPress={handleDelete} style={styles.menuItem}>
+                    <Text>Delete</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={handleRename} style={styles.menuItem}>
+                    <Text>Rename</Text>
+                  </TouchableOpacity>
+                </>
+              )}
+            </View>
+          </Modal>
+        </TouchableWithoutFeedback>
       </View>
 
       <Modal visible={isNewModalVisible} transparent={true} animationType="fade">
@@ -437,7 +439,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
 
-  // Sidebar & Short Menu _________________________________________________
+  // Short Menu ___________________________________________________________
   headerMenuContainer: {
     marginVertical: 5,
     marginHorizontal: 5,
@@ -446,10 +448,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-
-  // Sidebar
-
-  // Short Menu
   menuContainerShortBy: {
     backgroundColor: "white",
     borderColor: "gray", // atur warna border
