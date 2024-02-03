@@ -118,6 +118,42 @@ function App() {
             },
           }}
         />
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            title: "Settings",
+            headerStyle: {
+              backgroundColor: "#fff",
+              height: 50,
+              // borderWidth: 0,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="SyncBackup"
+          component={SyncBackup}
+          options={{
+            title: "SyncBackup",
+            headerStyle: {
+              backgroundColor: "#fff",
+              height: 50,
+              // borderWidth: 0,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="About"
+          component={About}
+          options={{
+            title: "About",
+            headerStyle: {
+              backgroundColor: "#fff",
+              height: 50,
+              // borderWidth: 0,
+            },
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
