@@ -90,17 +90,29 @@ Pada HOME:
 ... category yang pertama dihapus akan muncul lagi setelah category kedua dihapus
 ... dan saat category pertama yang muncul lagi dihapus lagi lalu category kedua yang dihapus muncul lagi pula
 ... sehingga terjadi semacam loop
+... **solusi:
+... masukkan kode-kode mulai dari "const jsonValue = ..." hingga "setShowDeleteRename(false);"
+... ke dalam try, 
+... dan setelah await tambahkan kode ini "setCategoriesAsync(updatedCategoriesAsync);"
+... ini bertujuan agar yang terupdate bukan hanya pada picker saja, melainkan asyncstorage juga
 - Rename -- FIXED
 ... masalahnya hampir mirip dengan Delete
 ... saat ingin merename dua category
 ... category yang pertama di rename akan kembali seperti semula setelah category lain di rename
 ... dan saat category lain yang di rename itu akan kembali seperti semula setelah categary lain dari lainnya di rename
 ... sehingga terjadi semacam gali lubang tutup lubang
+... **solusi (sama seperti delete):
+... masukkan kode-kode mulai dari "const jsonValue = ..." hingga "setShowDeleteRename(false);"
+... ke dalam try, 
+... dan setelah await tambahkan kode ini "setCategoriesAsync(updatedCategoriesAsync);"
+... ini bertujuan agar yang terupdate bukan hanya pada picker saja, melainkan asyncstorage juga
 - Rename -- FIXED
 ... Modal selalu menampilkan hasil dari rename category sebelumnya
 ... misal kita ingin merename category yang pertama dengan nama "A1"
 ... maka saat kita ingin me-rename category lain, placeholder pada modal rename adalah "A1"
-... solusi sementara mungkin bisa buat kondise placeholder reset saat modal tidak ada (!isModal)
+... **solusi sementara mungkin bisa buat kondise placeholder reset saat modal tidak ada (!isModal)
+... Dengan menambahkan setRenameCategory("") pada handleRenameCancel, 
+... nilai renameCategory akan diatur kembali ke string kosong setiap kali modal ditutup.
 
 Pada NoteAdd:
 note yang tidak ada isinya baik title maupun notenya bisa di save,
@@ -128,16 +140,16 @@ Pada DETAIL:
 ... delete memiliki masalah lagi, saat aku menambahkan date
 ... delete bermasalah ketika digunakan kondisi "item.date === route.params.item.date &&"
 ... masalah selesai saat aku menghapus "item.date === route.params.item.date &&"" dari findIndex
-... masalah selesai 
+... **masalah selesai 
 ... dengan menambahkan date pada retrievedNotes.forEach di dalam const fetchNotes = async () => pada HOME
 - Update: -- FIXED
 ... update memiliki masalah lagi, saat aku menambahkan date
 ... update bermasalah ketika digunakan kondisi "item.date === route.params.item.date &&""
 ... masalah selesai saat aku menghapus "item.date === route.params.item.date &&"" dari findIndex
-... masalah selesai 
+... **masalah selesai 
 ... dengan menambahkan date pada retrievedNotes.forEach di dalam const fetchNotes = async () => pada HOME
 - Date: -- FIXED
 ... date nampak undefined saat di fetch padahal saat di console.log Home date nampak
-... masalah selesai 
+... **masalah selesai 
 ... dengan menambahkan date pada retrievedNotes.forEach di dalam const fetchNotes = async () => pada HOME
 */

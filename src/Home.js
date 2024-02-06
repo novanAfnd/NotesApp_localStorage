@@ -51,7 +51,7 @@ const Home = () => {
         // Mengubah string JSON kembali ke array
         const retrievedCategories = JSON.parse(jsonValue);
 
-        console.log("retrieved Categories: ");
+        console.log("retrieved Categories: (fetchCategory function - Home) ");
         console.log(retrievedCategories);
 
         setCategoriesAsync(retrievedCategories); // Category pada Async
@@ -177,7 +177,7 @@ const Home = () => {
         // Mengubah string JSON ke array
         const retrievedNotes = JSON.parse(jsonValue);
 
-        console.log("retrieved Notes: adfasdf ");
+        console.log("retrieved Notes: (fetchNotes function - Home) ");
         console.log(retrievedNotes);
 
         // newNotes diisi item dari retrievedNotes
